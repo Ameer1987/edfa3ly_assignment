@@ -53,6 +53,9 @@ class CartApiController extends AbstractController
         ]);
     }
 
+    /**
+     * calculate subtotal
+     */
     private function getSubTotal($products)
     {
         $subtotal = 0;
