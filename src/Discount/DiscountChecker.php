@@ -5,8 +5,19 @@ namespace App\Discount;
 
 class DiscountChecker implements DiscountCheckerInterface
 {
+    /**
+     * list of products codes to check for applicable discounts
+     */
     private $products;
+
+    /**
+     * array of all available discounts classes 
+     */
     private $discounts;
+
+    /**
+     * Total discount value applied
+     */
     private $totalDiscount;
 
     public function __construct($products)
@@ -18,6 +29,9 @@ class DiscountChecker implements DiscountCheckerInterface
         ];
     }
 
+    /**
+     * return an array with keys are the discount names and values are the discount values
+     */
     public function applyDiscounts(): array
     {
         $discounts = [];
@@ -29,6 +43,9 @@ class DiscountChecker implements DiscountCheckerInterface
         return $discounts;
     }
 
+    /**
+     * Total discount value applied
+     */
     public function getTotalDiscount(): float
     {
         return $this->totalDiscount;

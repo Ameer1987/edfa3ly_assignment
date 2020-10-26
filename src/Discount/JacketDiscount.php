@@ -6,6 +6,10 @@ use App\Fixture\ProductFixture;
 
 class JacketDiscount extends AbstractDiscount
 {
+    /**
+     *  checks if the the discount is applicable to a list of products, if yes
+     *  it returns the discount value, else it return 0
+     */
     public function check(): float
     {
         $jacketPrice = (new ProductFixture())->loadData()['Jacket'];

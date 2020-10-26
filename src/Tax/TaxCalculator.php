@@ -12,6 +12,9 @@ class TaxCalculator implements TaxCalculatorInterface
         $this->subtotal = $subtotal;
     }
 
+    /**
+     * returns calculated taxes
+     */
     public function calculateTaxes(): float
     {
         return $this->subtotal * 0.14;

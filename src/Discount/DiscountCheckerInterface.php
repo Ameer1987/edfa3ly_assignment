@@ -2,7 +2,6 @@
 
 namespace App\Discount;
 
-
 interface DiscountCheckerInterface
 {
     public function applyDiscounts(): array;
