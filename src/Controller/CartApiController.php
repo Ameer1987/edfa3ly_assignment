@@ -8,6 +8,7 @@ use App\Tax\TaxCalculator;
 use App\Validator\ProductValidator;
 use App\Validator\CurrencyValidator;
 use App\Fixture\ProductFixture;
+use App\Validator\CartValidator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,13 +29,9 @@ class CartApiController extends AbstractController
         $currency = $request->request->get('currency') ?? $this->getParameter('app.defaultCurrency');
         $products = $request->request->get('products') ?? [];
 
-        $productValidator = new ProductValidator($products);
-        if (!$productValidator->validate()) {
-            return $this->json("incorrect product codes", 400);
-        }
-        $currencyValidator = new CurrencyValidator($currency);
-        if (!$currencyValidator->validate()) {
-            return $this->json("incorrect currency codes", 400);
+        $cartValidator = new CartValidator($currency, $products);
+        if (!$cartValidator->validate()) {
+            return $this->json($cartValidator->getError(), 400);
         }
 
         $subtotal = $this->getSubTotal($products);
