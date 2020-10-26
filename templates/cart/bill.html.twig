@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bill{% endblock %}
+
+{% block body %}
+<p>Subtotal: {{ subtotal }}</p>
+<p>Taxes: {{ taxes }}</p>
+{% if totalDiscount %}
+<p>Discounts: </p>
+{% for discountName, discountValue in discounts %}
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{discountName}}: -{{discountValue}}</p>
+{% endfor %}
+{% endif %}
+<p>Total: {{ total }}</p>
+{% endblock %}
