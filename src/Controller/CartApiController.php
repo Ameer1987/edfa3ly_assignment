@@ -6,6 +6,7 @@ use App\Currency\CurrencyFormatter;
 use App\Discount\DiscountChecker;
 use App\Tax\TaxCalculator;
 use App\Validator\ProductValidator;
+use App\Validator\CurrencyValidator;
 use App\Fixture\ProductFixture;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,9 +28,13 @@ class CartApiController extends AbstractController
         $currency = $request->request->get('currency') ?? $this->getParameter('app.defaultCurrency');
         $products = $request->request->get('products') ?? [];
 
-        $validator = new ProductValidator($products);
-        if (!$validator->validate()) {
+        $productValidator = new ProductValidator($products);
+        if (!$productValidator->validate()) {
             return $this->json("incorrect product codes", 400);
+        }
+        $currencyValidator = new CurrencyValidator($currency);
+        if (!$currencyValidator->validate()) {
+            return $this->json("incorrect currency codes", 400);
         }
 
         $subtotal = $this->getSubTotal($products);
