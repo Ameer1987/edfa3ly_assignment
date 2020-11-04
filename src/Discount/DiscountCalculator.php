@@ -24,8 +24,8 @@ class DiscountCalculator implements DiscountCalculatorInterface
     {
         $this->products = $products;
         $this->discounts = [
-            '10% off shoes' => ShoesDiscount::class,
-            '50% off jacket' => JacketDiscount::class,
+            ConstantPercentageOnProductDiscount::class,
+            BuyNProductsGetXPercentageOnProductDiscount::class,
         ];
     }
 
@@ -35,9 +35,15 @@ class DiscountCalculator implements DiscountCalculatorInterface
     public function applyDiscounts(): array
     {
         $discounts = [];
-        foreach ($this->discounts as $discountName => $discountClass) {
-            $discounts[$discountName] = (new $discountClass($this->products))->check();
-            $this->totalDiscount += $discounts[$discountName];
+        foreach ($this->discounts as $discountClass) {
+            $discountObject = new $discountClass($this->products);
+            foreach ($discountObject->getDiscounts() as $discount) {
+                $discountObject->setParams($discount);
+                if ($discountValue = $discountObject->getDiscountValue()) {
+                    $discounts[$discountObject->getDiscountName()] = $discountValue;
+                    $this->totalDiscount += $discountValue;
+                }
+            }
         }
 
         return $discounts;
