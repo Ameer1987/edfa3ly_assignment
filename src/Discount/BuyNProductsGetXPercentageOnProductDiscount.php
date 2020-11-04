@@ -4,7 +4,7 @@ namespace App\Discount;
 
 use App\Fixture\ProductFixture;
 
-class JacketDiscount extends AbstractDiscount
+class BuyNProductsGetXPercentageOnProductDiscount extends AbstractDiscount
 {
     /**
      *  checks if the the discount is applicable to a list of products, if yes
