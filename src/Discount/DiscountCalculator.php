@@ -52,7 +52,7 @@ class DiscountCalculator implements DiscountCalculatorInterface
     /**
      * Total discount value applied
      */
-    public function getTotalDiscount(): float
+    public function getTotalDiscount(): ?float
     {
         return $this->totalDiscount;
     }
