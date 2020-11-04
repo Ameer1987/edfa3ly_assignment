@@ -3,7 +3,7 @@
 namespace App\Discount;
 
 
-class DiscountChecker implements DiscountCheckerInterface
+class DiscountCalculator implements DiscountCalculatorInterface
 {
     /**
      * list of products codes to check for applicable discounts

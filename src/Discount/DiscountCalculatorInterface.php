@@ -2,7 +2,7 @@
 
 namespace App\Discount;
 
-interface DiscountCheckerInterface
+interface DiscountCalculatorInterface
 {
     public function applyDiscounts(): array;
     public function getTotalDiscount(): float;

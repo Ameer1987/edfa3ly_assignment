@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Currency\CurrencyFormatter;
-use App\Discount\DiscountChecker;
+use App\Discount\DiscountCalculator;
 use App\Tax\TaxCalculator;
 use App\Validator\ProductValidator;
 use App\Validator\CurrencyValidator;
@@ -38,9 +38,9 @@ class CartApiController extends AbstractController
 
         $taxes = (new TaxCalculator($subtotal))->calculateTaxes();
 
-        $discountsChecker = new DiscountChecker($products);
-        $discounts = $discountsChecker->applyDiscounts();
-        $totalDiscount = $discountsChecker->getTotalDiscount();
+        $discountsCalculator = new DiscountCalculator($products);
+        $discounts = $discountsCalculator->applyDiscounts();
+        $totalDiscount = $discountsCalculator->getTotalDiscount();
 
         $total = $subtotal + $taxes - $totalDiscount;
 
