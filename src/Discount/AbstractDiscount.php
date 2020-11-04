@@ -20,7 +20,7 @@ abstract class AbstractDiscount
     abstract public function getDiscounts(): array;
 
     /** Sets the parameters for a discount object */
-    abstract public function setParams(): void;
+    abstract public function setParams($params): void;
 
     /**
      *  Checks if the the discount is applicable to the list of products, if yes
